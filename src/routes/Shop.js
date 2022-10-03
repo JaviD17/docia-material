@@ -1,0 +1,44 @@
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Unstable_Grid2";
+import Layout from "../components/Layout";
+import ShopCard from "../components/ShopCard";
+import Header from "../components/Header";
+import ShopMenu from "../components/ShopMenu";
+import { useCollection } from "../hooks/useCollection";
+
+export default function BasicGrid() {
+  // const [products, setProducts] = useState(null);
+
+  // useEffect(() => {
+  //   const ref = collection(db, "products");
+  //   getDocs(ref).then((snapshot) => {
+  //     let results = [];
+  //     snapshot.docs.forEach((doc) => {
+  //       results.push({ id: doc.id, ...doc.data() });
+  //     });
+  //     setProducts(results);
+  //     console.log(results);
+  //   });
+  // }, []);
+
+  const { documents: products } = useCollection("products");
+
+  return (
+    <Layout>
+      <Header>Shop</Header>
+      <ShopMenu />
+
+      {products && (
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={4}>
+            {products.map((p) => (
+              <Grid key={p.id} xs={12} md={3}>
+                <ShopCard products={p} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+    </Layout>
+  );
+}
