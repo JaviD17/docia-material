@@ -26,7 +26,6 @@ export default function BasicGrid() {
   return (
     <Layout>
       <Header>Shop</Header>
-      <ShopMenu />
 
       {products && (
         <Box sx={{ flexGrow: 1 }}>
@@ -39,6 +38,7 @@ export default function BasicGrid() {
           </Grid>
         </Box>
       )}
+      <ShopMenu />
     </Layout>
   );
 }
