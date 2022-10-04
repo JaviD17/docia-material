@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import ShopCard from "../components/ShopCard";
 import ShopModal from "../components/ShopModal";
 import Header from "../components/Header";
-import ShopMenu from "../components/ShopMenu";
+// import ShopMenu from "../components/ShopMenu";
 import { useCollection } from "../hooks/useCollection";
 
 export default function Shop() {
@@ -55,13 +55,13 @@ export default function Shop() {
           <Grid container spacing={4}>
             {products.map((p) => (
               <Grid key={p.id} xs={12} md={3}>
-                <ShopCard products={p} />
+                <ShopCard product={p} />
               </Grid>
             ))}
           </Grid>
         </Box>
       )}
-      <ShopMenu />
+      {/* <ShopMenu /> */}
     </Layout>
   );
 }

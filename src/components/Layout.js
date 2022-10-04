@@ -9,7 +9,7 @@ export default function Layout(props) {
         maxWidth="xl"
         sx={{
           py: 3,
-          position: 'relative'
+          // position: 'relative'
         }}
       >
         {props.children}
