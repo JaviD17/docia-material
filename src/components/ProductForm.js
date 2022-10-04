@@ -9,7 +9,7 @@ import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
 
 import { db } from "../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export default function ProductForm() {
   const [name, setName] = useState("");
@@ -29,6 +29,7 @@ export default function ProductForm() {
       description: description,
       gender: gender,
       src: "/card2.jpg",
+      createdAt: Timestamp.now(),
     });
   };
 

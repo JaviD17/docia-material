@@ -9,6 +9,8 @@ import Layout from "./components/Layout";
 import Contact from "./routes/Contact";
 import MealPlans from "./routes/MealPlans";
 import Cart from "./routes/Cart";
+import Account from "./routes/Account";
+import DashboardPage from "./routes/DashboardPage";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/mealplans" element={<MealPlans />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/account" element={<Account />} />
+        <Route path="/profile/dashboard" element={<DashboardPage />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </Layout>

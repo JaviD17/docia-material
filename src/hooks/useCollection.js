@@ -7,7 +7,7 @@ export const useCollection = (c) => {
 
   useEffect(() => {
     let ref = collection(db, c);
-    let q = query(ref, orderBy("name", "asc"));
+    let q = query(ref, orderBy("createdAt", "desc"));
 
     const unsub = onSnapshot(q, (snapshot) => {
       let results = [];

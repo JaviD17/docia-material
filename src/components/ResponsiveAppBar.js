@@ -41,7 +41,25 @@ const pages = [
     to: "/profile",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const settings = [
+  {
+    name: "Profile",
+    to: "/profile",
+  },
+  {
+    name: "Account",
+    to: "/profile/account",
+  },
+  {
+    name: "Dashboard",
+    to: "/profile/dashboard",
+  },
+  {
+    name: "Logout",
+    to: "/",
+  },
+];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -131,8 +149,8 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component={RouterLink}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -205,8 +223,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.name}
+                  onClick={handleCloseUserMenu}
+                  component={RouterLink}
+                  to={setting.to}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
