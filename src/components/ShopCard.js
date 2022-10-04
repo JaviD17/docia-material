@@ -4,10 +4,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Box } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Delete from "@mui/icons-material/Delete";
+
 import { Link as RouterLink } from "react-router-dom";
 
+import { db } from "../firebase/config";
+import { doc, deleteDoc } from "firebase/firestore";
+
 export default function MultiActionAreaCard({ product }) {
+  const handleDelete = async () => {
+    const ref = doc(db, "products", product.id);
+    await deleteDoc(ref);
+  };
+
   return (
     <Card sx={{ borderRadius: 2 }}>
       <CardActionArea component={RouterLink} to={product.id}>
@@ -46,13 +56,8 @@ export default function MultiActionAreaCard({ product }) {
         >
           Share
         </Button>
-        <Button
-          sx={{ borderRadius: 2 }}
-          variant="contained"
-          color="primary"
-          startIcon={<AddShoppingCartIcon />}
-        >
-          To Cart
+        <Button sx={{ borderRadius: 2 }} variant="contained" color="primary">
+          Buy Now
         </Button>
       </CardActions>
       <CardActions disableSpacing>
@@ -61,8 +66,21 @@ export default function MultiActionAreaCard({ product }) {
           variant="contained"
           color="secondary"
           fullWidth
+          startIcon={<AddShoppingCartIcon />}
         >
-          Buy Now
+          Add To Cart
+        </Button>
+      </CardActions>
+      <CardActions disableSpacing>
+        <Button
+          sx={{ borderRadius: 2 }}
+          variant="text"
+          color="warning"
+          fullWidth
+          startIcon={<Delete />}
+          onClick={handleDelete}
+        >
+          Delete
         </Button>
       </CardActions>
     </Card>

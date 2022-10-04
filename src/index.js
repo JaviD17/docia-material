@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,10 +17,10 @@ const theme = createTheme({
       main: "#A4CBB4",
     },
     error: {
-      main: '#DC2728'
+      main: "#DC2728",
     },
     warning: {
-      main: '#DB7707'
+      main: "#DB7707",
     },
     info: {
       main: "#2463EB",
@@ -43,9 +44,11 @@ const theme = createTheme({
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -12,6 +12,12 @@ import { useCollection } from "../hooks/useCollection";
 export default function Shop() {
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
+
+  // const handleClick = (e) => {
+  //   console.log(deleteDoc);
+  //   console.log(e.target);
+  // };
+
   // const [products, setProducts] = useState(null);
 
   // useEffect(() => {
@@ -55,7 +61,11 @@ export default function Shop() {
           <Grid container spacing={4}>
             {products.map((p) => (
               <Grid key={p.id} xs={12} md={3}>
-                <ShopCard product={p} />
+                <ShopCard
+                  product={p}
+                  // deleteDoc
+                  // setDeleteDoc={setDeleteDoc}
+                />
               </Grid>
             ))}
           </Grid>

@@ -13,7 +13,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import { Link as RouterLink } from "react-router-dom";
+
+import { useLogout } from "../hooks/useLogout";
 
 const pages = [
   {
@@ -36,10 +39,6 @@ const pages = [
     name: "Contact",
     to: "/contact",
   },
-  {
-    name: "Profile",
-    to: "/profile",
-  },
 ];
 
 const settings = [
@@ -55,15 +54,12 @@ const settings = [
     name: "Dashboard",
     to: "/profile/dashboard",
   },
-  {
-    name: "Logout",
-    to: "/",
-  },
 ];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { logout } = useLogout();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -78,6 +74,10 @@ const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleCloseUserMenuAndLogout = () => {
+    setAnchorElUser(null);
+    logout();
   };
 
   return (
@@ -232,6 +232,13 @@ const ResponsiveAppBar = () => {
                   <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem
+                onClick={handleCloseUserMenuAndLogout}
+                component={RouterLink}
+                to="/"
+              >
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
