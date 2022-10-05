@@ -11,8 +11,10 @@ import { Link as RouterLink } from "react-router-dom";
 
 import { db } from "../firebase/config";
 import { doc, deleteDoc } from "firebase/firestore";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function MultiActionAreaCard({ product }) {
+  const { user } = useAuthContext();
   const handleDelete = async () => {
     const ref = doc(db, "products", product.id);
     await deleteDoc(ref);
@@ -71,18 +73,20 @@ export default function MultiActionAreaCard({ product }) {
           Add To Cart
         </Button>
       </CardActions>
-      <CardActions disableSpacing>
-        <Button
-          sx={{ borderRadius: 2 }}
-          variant="text"
-          color="warning"
-          fullWidth
-          startIcon={<Delete />}
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
-      </CardActions>
+      {user && (
+        <CardActions disableSpacing>
+          <Button
+            sx={{ borderRadius: 2 }}
+            variant="text"
+            color="warning"
+            fullWidth
+            startIcon={<Delete />}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }

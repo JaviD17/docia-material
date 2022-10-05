@@ -1,17 +1,21 @@
 // import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 import Layout from "../components/Layout";
 import ShopCard from "../components/ShopCard";
 import ShopModal from "../components/ShopModal";
 import Header from "../components/Header";
-// import ShopMenu from "../components/ShopMenu";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 import { useCollection } from "../hooks/useCollection";
 
 export default function Shop() {
-  const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  // const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
+  const { documents: products } = useCollection("products");
+
+  const { user } = useAuthContext();
 
   // const handleClick = (e) => {
   //   console.log(deleteDoc);
@@ -32,13 +36,11 @@ export default function Shop() {
   //   });
   // }, []);
 
-  const { documents: products } = useCollection("products");
-
   return (
     <Layout>
       <Header>Shop</Header>
 
-      {matches && (
+      {user && (
         <Box
           sx={{
             mb: 3,
