@@ -13,53 +13,58 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import { Link as RouterLink } from "react-router-dom";
 
 import { useLogout } from "../hooks/useLogout";
 
-const pages = [
-  {
-    name: "Home",
-    to: "/",
-  },
-  {
-    name: "Shop",
-    to: "/shop",
-  },
-  {
-    name: "Story",
-    to: "/story",
-  },
-  {
-    name: "MealPlans",
-    to: "/mealplans",
-  },
-  {
-    name: "Contact",
-    to: "/contact",
-  },
-];
-
-const settings = [
-  {
-    name: "Profile",
-    to: "/profile",
-  },
-  {
-    name: "Account",
-    to: "/profile/account",
-  },
-  {
-    name: "Dashboard",
-    to: "/profile/dashboard",
-  },
-];
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { logout } = useLogout();
+  const { user } = useAuthContext();
+
+  const pages = [
+    {
+      name: "Home",
+      to: "/",
+    },
+    {
+      name: "Shop",
+      to: "/shop",
+    },
+    {
+      name: "Story",
+      to: "/story",
+    },
+    {
+      name: "MealPlans",
+      to: "/mealplans",
+    },
+    {
+      name: "Contact",
+      to: "/contact",
+    },
+  ];
+
+  const settings = [
+    {
+      name: "Profile",
+      to: "/profile",
+    },
+    {
+      name: "Account",
+      to: "/profile/account",
+    },
+    {
+      name: "Dashboard",
+      to: "/profile/dashboard",
+    },
+  ];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -183,64 +188,111 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box
-            sx={{
-              flexGrow: 0,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <IconButton
-              aria-label="shopping cart"
-              sx={{ color: "black" }}
-              size="medium"
-              component={RouterLink}
-              to="/cart"
-            >
-              <ShoppingCartIcon fontSize="medium" />
-            </IconButton>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+          {user && (
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 1,
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting.name}
-                  onClick={handleCloseUserMenu}
-                  component={RouterLink}
-                  to={setting.to}
-                >
-                  <Typography textAlign="center">{setting.name}</Typography>
-                </MenuItem>
-              ))}
-              <MenuItem
-                onClick={handleCloseUserMenuAndLogout}
+              <IconButton
+                aria-label="shopping cart"
+                sx={{ color: "black" }}
+                size="medium"
                 component={RouterLink}
-                to="/"
+                to="/cart"
               >
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+                <ShoppingCartIcon fontSize="medium" />
+              </IconButton>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    key={setting.name}
+                    onClick={handleCloseUserMenu}
+                    component={RouterLink}
+                    to={setting.to}
+                  >
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </MenuItem>
+                ))}
+                <MenuItem
+                  onClick={handleCloseUserMenuAndLogout}
+                  component={RouterLink}
+                  to="/"
+                >
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
+
+          {!user && (
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              {/* <IconButton
+                aria-label="shopping cart"
+                sx={{ color: "black" }}
+                size="medium"
+                component={RouterLink}
+                to="/cart"
+              >
+                <ShoppingCartIcon fontSize="medium" />
+              </IconButton> */}
+              <Tooltip title="Login">
+                <Button
+                  color="base"
+                  variant="contained"
+                  startIcon={<LoginIcon />}
+                  component={RouterLink}
+                  to="/login"
+                >
+                  Login
+                </Button>
+              </Tooltip>
+
+              <Tooltip title="Login">
+                <Button
+                  color="base"
+                  variant="contained"
+                  startIcon={<PersonAddIcon />}
+                  component={RouterLink}
+                  to="/signup"
+                >
+                  Signup
+                </Button>
+              </Tooltip>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

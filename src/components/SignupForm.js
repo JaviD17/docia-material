@@ -1,13 +1,11 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-// import Radio from "@mui/material/Radio";
-// import RadioGroup from "@mui/material/RadioGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import Fab from "@mui/material/Fab";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 import { useSignup } from "../hooks/useSignup";
 
@@ -15,7 +13,6 @@ export default function SignUpForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const [gender, setGender] = useState("");
   const { error, signup } = useSignup();
 
   const handleSubmit = async (e) => {
@@ -55,13 +52,40 @@ export default function SignUpForm() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
-        id="outlined-price"
+        id="outlined-password"
         label="Password"
         type="password"
         autoComplete="current-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {/* <TextField
+        id="outlined-image"
+        // label="Image"
+        type="file"
+        accept="image/*"
+      /> */}
+
+      {/* this works with button only */}
+      <label htmlFor="upload-photo">
+        <input
+          style={{ display: "none" }}
+          id="upload-photo"
+          name="upload-photo"
+          type="file"
+          accept="image/*"
+        />
+        <Fab
+          color="secondary"
+          variant="extended"
+          component="span"
+          aria-label="upload"
+          sx={{ mt: 1 }}
+        >
+          <UploadFileIcon sx={{ mr: 1 }} />
+          Upload
+        </Fab>
+      </label>
 
       {error && (
         <Alert variant="outlined" severity="error" sx={{ mt: 1 }}>
@@ -70,20 +94,6 @@ export default function SignUpForm() {
         </Alert>
       )}
 
-      {/* <FormLabel id="demo-radio-buttons-group-label" sx={{ pt: 2 }}>
-        Gender
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="female"
-        name="radio-buttons-group"
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
-      >
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="unisex" control={<Radio />} label="Unisex" />
-      </RadioGroup> */}
       <Button
         type="submit"
         color="primary"
