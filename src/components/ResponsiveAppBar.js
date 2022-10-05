@@ -209,7 +209,7 @@ const ResponsiveAppBar = () => {
               </IconButton>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={user.displayName} src={user.photoURL} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -259,15 +259,6 @@ const ResponsiveAppBar = () => {
                 gap: 1,
               }}
             >
-              {/* <IconButton
-                aria-label="shopping cart"
-                sx={{ color: "black" }}
-                size="medium"
-                component={RouterLink}
-                to="/cart"
-              >
-                <ShoppingCartIcon fontSize="medium" />
-              </IconButton> */}
               <Tooltip title="Login">
                 <Button
                   color="base"

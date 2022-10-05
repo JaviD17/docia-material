@@ -11,11 +11,14 @@ import Button from "@mui/material/Button";
 import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 export default function ProductForm() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [gender, setGender] = useState(null);
+  const { user } = useAuthContext();
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -30,6 +33,7 @@ export default function ProductForm() {
       gender: gender,
       src: "/card2.jpg",
       createdAt: Timestamp.now(),
+      createdBy: user.uid,
     });
   };
 

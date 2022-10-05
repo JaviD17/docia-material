@@ -6,17 +6,24 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
 import { useLogin } from "../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { error, login } = useLogin();
+  const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(email, password);
-    login(email, password);
+    // console.log(email, password);
+    await login(email, password);
+
+    setEmail("");
+    setPassword("");
+
+    navigate("/profile");
   };
 
   return (

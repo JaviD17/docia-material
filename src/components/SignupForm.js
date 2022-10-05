@@ -8,18 +8,53 @@ import Fab from "@mui/material/Fab";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 import { useSignup } from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { error, signup } = useSignup();
+  const [name, setName] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailError, setThumbnailError] = useState(null);
+  const { error, isPending, signup } = useSignup();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(name, email, password);
 
-    signup(name, email, password);
+    await signup(email, password, name, thumbnail);
+
+    setName("");
+    setEmail("");
+    setPassword("");
+
+    navigate("/profile");
+  };
+
+  const handleFileChange = (e) => {
+    setThumbnail(null);
+    let selected = e.target.files[0];
+    console.log(selected);
+
+    if (!selected) {
+      setThumbnailError("Please select a file");
+      return;
+    }
+
+    if (!selected.type.includes("image")) {
+      setThumbnailError("Selected file must be an image");
+      return;
+    }
+
+    if (selected.size > 500000) {
+      setThumbnailError("Image file size must be less than 500kb");
+      return;
+    }
+
+    setThumbnailError(null);
+    setThumbnail(selected);
+    // console.log("Thumbnail updated", thumbnail);
   };
 
   return (
@@ -74,6 +109,8 @@ export default function SignUpForm() {
           name="upload-photo"
           type="file"
           accept="image/*"
+          // value={thumbnail}
+          onChange={handleFileChange}
         />
         <Fab
           color="secondary"
@@ -87,6 +124,13 @@ export default function SignUpForm() {
         </Fab>
       </label>
 
+      {thumbnailError && (
+        <Alert variant="outlined" severity="error" sx={{ mt: 1 }}>
+          <AlertTitle>Error</AlertTitle>
+          {thumbnailError} — <strong>check it out!</strong>
+        </Alert>
+      )}
+
       {error && (
         <Alert variant="outlined" severity="error" sx={{ mt: 1 }}>
           <AlertTitle>Error</AlertTitle>
@@ -94,15 +138,30 @@ export default function SignUpForm() {
         </Alert>
       )}
 
-      <Button
-        type="submit"
-        color="primary"
-        variant="contained"
-        size="large"
-        sx={{ mt: 2 }}
-      >
-        Sign Up
-      </Button>
+      {!isPending && (
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          size="large"
+          sx={{ mt: 2 }}
+        >
+          Sign Up
+        </Button>
+      )}
+
+      {isPending && (
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          size="large"
+          disabled
+          sx={{ mt: 2 }}
+        >
+          Loading
+        </Button>
+      )}
     </FormControl>
   );
 }
