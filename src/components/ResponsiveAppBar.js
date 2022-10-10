@@ -89,7 +89,6 @@ const ResponsiveAppBar = () => {
 
   return (
     <>
-      {" "}
       <AppBar position="sticky" sx={{ borderRadius: 2 }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -109,7 +108,7 @@ const ResponsiveAppBar = () => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              DOCIA
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
