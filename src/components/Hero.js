@@ -3,14 +3,18 @@ import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 
 function Item(props) {
+  // bgcolor: "rgba(164, 203, 180, .5)", for Paper component
+
   return (
     <Paper
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        p: 1,
-        bgcolor: "rgba(164, 203, 180, .5)",
+        justifyContent: "space-between",
+        p: 2,
+        bgcolor: "rgba(0, 0, 0, .25)",
+        height: 400,
       }}
     >
       <h2>{props.item.name}</h2>

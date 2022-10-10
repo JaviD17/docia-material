@@ -11,11 +11,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import NomadologySvg from "./NomadologySvg";
 
 import { Link as RouterLink } from "react-router-dom";
 
@@ -43,6 +43,10 @@ const pages = [
   {
     name: "Contact",
     to: "/contact",
+  },
+  {
+    name: "FAQ",
+    to: "/faq",
   },
 ];
 
@@ -92,7 +96,9 @@ const ResponsiveAppBar = () => {
       <AppBar position="sticky" sx={{ borderRadius: 2 }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <NomadologySvg
+              sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
             <Typography
               variant="h6"
               noWrap
@@ -108,7 +114,7 @@ const ResponsiveAppBar = () => {
                 textDecoration: "none",
               }}
             >
-              DOCIA
+              NOMADOLOGY
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -153,7 +159,9 @@ const ResponsiveAppBar = () => {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            <NomadologySvg
+              sx={{ fontSize: 60, display: { xs: "flex", md: "none" }, mr: 1 }}
+            />
             {!user && (
               <Typography
                 variant="h5"
@@ -171,7 +179,7 @@ const ResponsiveAppBar = () => {
                   textDecoration: "none",
                 }}
               >
-                LOGO
+                N
               </Typography>
             )}
             {user && (
@@ -191,7 +199,7 @@ const ResponsiveAppBar = () => {
                   textDecoration: "none",
                 }}
               >
-                LOGO
+                N
               </Typography>
             )}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -332,7 +340,7 @@ const ResponsiveAppBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      {!matches && (
+      {!user && !matches && (
         <Box
           sx={{
             // flexGrow: 0,

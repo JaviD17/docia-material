@@ -7,6 +7,7 @@ import Story from "./routes/Story";
 import Profile from "./routes/Profile";
 import Layout from "./components/Layout";
 import Contact from "./routes/Contact";
+import FAQ from "./routes/FAQ";
 import MealPlans from "./routes/MealPlans";
 import Cart from "./routes/Cart";
 import Account from "./routes/Account";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/story" element={<Story />} />
             <Route path="/mealplans" element={<MealPlans />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route
               path="/profile"
               element={user ? <Profile /> : <Navigate to="/login" />}
