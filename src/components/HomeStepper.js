@@ -18,16 +18,13 @@ const steps = [
     description: `Sign up and fill out a training application (here) and our team will reach out to you in 24 hours to discuss options.`,
   },
   {
-    label: "Choose A Plan",
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+    label: "Consultation - Meet Your Coach",
+    description: `Initial briefing with your coach, checkout this Consultation Checklist!`,
   },
   {
-    label: "Create an ad",
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
+    label: "Choose A Plan",
+    description:
+      "We offer several different payment plans ranging from bi-weekly, monthly, and in full. Click below to read more.",
   },
 ];
 
@@ -85,9 +82,14 @@ export default function HomeStepper() {
         ))}
       </Stepper>
       {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius: 2, bgcolor: "" }}>
           <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handleReset}
+            sx={{ mt: 1, mr: 1 }}
+          >
             Reset
           </Button>
         </Paper>

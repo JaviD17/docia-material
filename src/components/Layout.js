@@ -11,6 +11,7 @@ export default function Layout(props) {
           py: 3,
           // position: 'relative'
         }}
+        {...props}
       >
         {props.children}
       </Container>

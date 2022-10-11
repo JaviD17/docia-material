@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import Home from "./routes/Home";
@@ -16,45 +17,49 @@ import SignUpPage from "./routes/SignUpPage";
 import LoginPage from "./routes/LoginPage";
 // import { auth } from "./firebase/config";
 import { useAuthContext } from "./hooks/useAuthContext";
+import Footer from "./components/Footer";
 
 function App() {
   const { user, authIsReady } = useAuthContext();
   return (
-    <Layout>
-      {authIsReady && (
-        <>
-          <ResponsiveAppBar />
+    <Fragment>
+      <Layout>
+        {authIsReady && (
+          <>
+            <ResponsiveAppBar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/:id" element={<Product />} />
-            <Route path="/story" element={<Story />} />
-            <Route path="/mealplans" element={<MealPlans />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route
-              path="/profile"
-              element={user ? <Profile /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/profile/account"
-              element={user ? <Account /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/profile/dashboard"
-              element={user ? <DashboardPage /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/cart"
-              element={user ? <Cart /> : <Navigate to="/login" />}
-            />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
-        </>
-      )}
-    </Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/:id" element={<Product />} />
+              <Route path="/story" element={<Story />} />
+              <Route path="/mealplans" element={<MealPlans />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route
+                path="/profile"
+                element={user ? <Profile /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/profile/account"
+                element={user ? <Account /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/profile/dashboard"
+                element={user ? <DashboardPage /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/cart"
+                element={user ? <Cart /> : <Navigate to="/login" />}
+              />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Routes>
+          </>
+        )}
+      </Layout>
+      <Footer />
+    </Fragment>
   );
 }
 
